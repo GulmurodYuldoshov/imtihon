@@ -139,7 +139,7 @@ let product={
     "id":document.getElementById("id").value,
     "title":document.getElementById("title").value,
     "img" : document.getElementById("img").value,
-    "price" : document.getElementById("price").value,
+    "price" : document.getElementById("narx").value,
     "birthDate": document.getElementById("birthDate").value,
     "sizes":{
     "width" :document.getElementById("w").value,
