@@ -45,7 +45,7 @@ function handleEdit2(event){
         document.getElementById("h").value=product[t].height;
 
     }else{
-        document.getElementById(t).value=product[t];
+        document.getElementById(t).value = product[t];
     }
   }
 }
@@ -66,11 +66,7 @@ let renderProduct=(products)=>{
 
         elDelete.dataset.id = product.id
         
-        function handleDelete(evt) {
-            
-        }
-
-        elDelete.addEventListener("click" ,handleDelete)
+    
         elEditBtn.addEventListener("click",handleEdit2);
             
      
@@ -82,7 +78,7 @@ let renderProduct=(products)=>{
         elYear.textContent = product.birthDate
         elBadge.textContent = product.sizes.width + " x " +product.sizes.height
         elImg.src = product.img
-        elPrise.textContent ="$"+  product. price
+        elPrise.textContent ="$"+  product.price
         elTitle.textContent = product.title
         elLi.className = 'col-6'
         elLi.appendChild(elCard)
@@ -102,8 +98,6 @@ function hadleAdd(evt) {
     let parrotWidth = document.querySelector('#parrot_width')
     let parrotHeight = document.querySelector('#parrot_height')
     let elFeatures = document.querySelector('#features')
-
- 
 
    let data = {
         id: uuid.v4(),
@@ -139,21 +133,19 @@ function handleSearch(evt) {
     renderProduct(searchParrot)
 }
 
-
-
 function handleEdit(evt) {
     evt.preventDefault();
 let product={
     "id":document.getElementById("id").value,
     "title":document.getElementById("title").value,
     "img" : document.getElementById("img").value,
-    "price":document.getElementById("narx").value,
+    "price" : document.getElementById("price").value,
     "birthDate": document.getElementById("birthDate").value,
     "sizes":{
     "width" :document.getElementById("w").value,
     "height":document.getElementById("h").value
     },
-    "features":document.getElementById("izoh").value
+    "features":document.getElementById("features").value
 }
 
 let index = findIndexByKeyValue(products,"id",product.id);
@@ -169,17 +161,21 @@ function findIndexByKeyValue(arraytosearch, key, valuetosearch) {
         return -1;
     }
     
+function handleDelete(evt) {
+    if (evt.target.matches('.js-delete')) {
+        let btnDelete =evt.target.closest('li').dataset.id 
+        let deleteProduct = products.filter(product=>
+            product.id != btnDelete
+        )
+        products = deleteProduct
+        renderProduct(deleteProduct)
+    }
+    
+}
+
+    elList.addEventListener("click" , handleDelete)
  elAdd.addEventListener("submit", hadleAdd)
  elSearch.addEventListener("submit", handleSearch)
  elEditModal.addEventListener("submit", handleEdit)
 
 
-//  function handleChange (evt) {
-//     if (evt.target.matches('.delete')) {
-//       let deletedItem = evt.target.closest('li')
-//       let itemId = deletedItem.dataset.id
-//       let deletCard = products.filter((product)=> product.id !=itemId)
-//       products = deletCard
-//       renderParrots (deletCard)
-//     }
-//   }
